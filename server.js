@@ -48,7 +48,11 @@ app.post('/register-attendance', (req, res) => {
 app.get('/', (req, res) => {
   Attendance.findOne({}, (err, doc) => {
   	if (err) res.send('An error occurred... T_T');
-  	res.send(`つ ◕_◕ ༽つ  つ ◕_◕ ༽つ — "The current count is ${doc.total}."`);
+  	if (!doc) {
+  		res.send('No one visited yet... very depressing. (っ- ‸ – ς)');
+  	} else {
+			res.send(`つ ◕_◕ ༽つ  つ ◕_◕ ༽つ — "The current count is ${doc.total}."`);
+  	}
   });
 });
 
