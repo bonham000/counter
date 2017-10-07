@@ -51,7 +51,9 @@ app.get('/', (req, res) => {
   	if (!doc) {
   		res.send('No one visited yet... very depressing. (っ- ‸ – ς)');
   	} else {
-			res.send(`つ ◕_◕ ༽つ  つ ◕_◕ ༽つ — "The current count is ${doc.total}."`);
+			res.send(`
+				つ ◕_◕ ༽つ  つ ◕_◕ ༽つ — "The current count is ${doc.total}" (Count started on Oct. 6, 2017). 
+			`);
   	}
   });
 });
