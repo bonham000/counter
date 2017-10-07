@@ -4,7 +4,9 @@ const mongoose = require('mongoose');
 
 dotenv.config();
 
-const MONGO_URL = process.env.NODE_ENV === 'production'
+const production = process.env.NODE_ENV === 'production';
+const PORT = production ? process.env.PORT : 5000;
+const MONGO_URL = production
 	? process.env.MONGO_PROD_URL
 	: process.env.MONGO_URL;
 
@@ -25,7 +27,6 @@ const AttendanceSchema = new Schema({
 const Attendance = mongoose.model('Attendance', AttendanceSchema);
 
 const app = express();
-const PORT = process.env.PORT ? process.env.PORT : 5000;
 
 app.post('/register-attendance', (req, res) => {
 	const options = { upsert: true, new: true, setDefaultsOnInsert: true };
@@ -51,6 +52,6 @@ app.get('/', (req, res) => {
   });
 });
 
-app.listen(5000, () => {
-  console.log('Sophisticated counter app listening on port 5000!');
+app.listen(PORT, () => {
+  console.log(`Sophisticated counter app listening on port ${PORT}!`);
 });
