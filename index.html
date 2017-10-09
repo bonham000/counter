@@ -1,0 +1,45 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Sophisticated Counter</title>
+
+  <style>
+  	body {
+  		font-size: 25px;
+  		padding: 15px;
+  	}
+	</style>
+
+</head>
+
+<body>
+
+	<div id='main'></div>
+
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.16.2/axios.min.js'></script>
+  <script>
+  	const setBackground = () => {
+  		const rand = () => Math.round(Math.random() * (250));
+  		const red = rand();
+  		const blue = rand();
+  		const green = rand();
+  		document.body.style.background = `rgb(${red}, ${green}, ${blue})`;
+  	}
+  	(function() {
+			setBackground();
+	  	setInterval(() => setBackground(), 10000);
+  	})();
+  	(function() {
+			axios.get('/get-count')
+				.then(res => {
+					document.getElementById('main').innerHTML = res.data;
+				})
+				.catch(err => {
+					document.getElementById('main').innerHTML = 'There was an error fetching the count...';
+				});
+		})();
+  </script>
+</body>
+</html>
