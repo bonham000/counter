@@ -31,7 +31,7 @@
 			setBackground();
 	  	setInterval(() => setBackground(), 10000);
   	})();
-  	(function() {
+  	const fetchCount = () => {
 			axios.get('/get-count')
 				.then(res => {
 					document.getElementById('main').innerHTML = res.data;
@@ -39,7 +39,11 @@
 				.catch(err => {
 					document.getElementById('main').innerHTML = 'There was an error fetching the count...';
 				});
-		})();
+    };
+    (function() {
+      fetchCount();
+      setInterval(() => fetchCount(), 60000);
+    })();
   </script>
 </body>
 </html>
