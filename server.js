@@ -31,17 +31,20 @@ const app = express();
 app.post('/register-attendance', (req, res) => {
 	const options = { upsert: true, new: true, setDefaultsOnInsert: true };
 	Attendance.findOneAndUpdate({}, {}, options, (err, doc) => {
-		doc.total++;
-		doc.save(err => {
-		  if (err) {
-		    console.log('There was an error updating the count...');
-		    console.log(err);
-		    res.status(500);
-		  } else {
-		    console.log('Count updated!');
-		    res.end();
-		  }
-		});
+		if (doc) {
+			doc.total++;
+			doc.save(err => {
+			  if (err) {
+			    console.log('There was an error updating the count...');
+			    console.log(err);
+			    res.status(500);
+			  } else {
+			    console.log('Count updated!');
+			    res.end();
+			  }
+			});
+		}
+		res.end();
 	});
 });
 
