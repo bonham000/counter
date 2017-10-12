@@ -52,7 +52,7 @@ const calculateDayRange = () => {
 	const oneDay = 24 * 60 * 60 * 1000;
 	const startDate = new Date(2017, 9, 8);
 	const currentDate = new Date();
-	return Math.round(
+	return Math.floor(
 		Math.abs(
 			(startDate.getTime() - currentDate.getTime()) / (oneDay)
 		)
