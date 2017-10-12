@@ -48,14 +48,27 @@ app.post('/register-attendance', (req, res) => {
 	});
 });
 
+const calculateDayRange = () => {
+	const oneDay = 24 * 60 * 60 * 1000;
+	const startDate = new Date(2017, 9, 8);
+	const currentDate = new Date();
+	return Math.round(
+		Math.abs(
+			(startDate.getTime() - currentDate.getTime()) / (oneDay)
+		)
+	);
+}
+
 app.get('/get-count', (req, res) => {
 	  Attendance.findOne({}, (err, doc) => {
   	if (err) res.send('An error occurred... T_T');
   	if (!doc) {
   		res.send('No one visited yet... very depressing. (っ- ‸ – ς)');
   	} else {
+			const { total } = doc;
+			const average = total / calculateDayRange();
   		res.send(`
-				つ ◕_◕ ༽つ  つ ◕_◕ ༽つ ~~~ "The current count is ${doc.total}" ~~~ (count started on Oct. 8, 2017). 
+				つ ◕_◕ ༽つ  つ ◕_◕ ༽つ ~~~ "The current count is ${total}" ~~~ (started on Oct. 8, 2017 — about ${average} hits per day).
 			`);
   	}
   });
