@@ -66,7 +66,7 @@ app.get('/get-count', (req, res) => {
   		res.send('No one visited yet... very depressing. (っ- ‸ – ς)');
   	} else {
 			const { total } = doc;
-			const average = total / calculateDayRange();
+			const average = Math.floor(total / calculateDayRange());
   		res.send(`
 				つ ◕_◕ ༽つ  つ ◕_◕ ༽つ ~~~ "The current count is ${total}" ~~~ (started on Oct. 8, 2017 — about ${average} hits per day).
 			`);
